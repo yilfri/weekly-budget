@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Error from './Error';
 
 const Pregunta = () => {
+	const [cantidad, setCantidad] = useState(0);
+	const [error, setError] = useState(false);
+
+	// Evento que lee el presupuesto.
+	const handleChange = (e) => {
+		setCantidad(parseInt(e.target.value, 10));
+	};
+
+	// Evento que envia el presupuesto.
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		//Validar presupuesto
+		if (cantidad <= 0 || isNaN(cantidad)) {
+			setError(true);
+			return;
+		}
+
+		setError(false);
+	};
+
 	return (
 		<>
 			<h2>Coloca tu presupuesto</h2>
-			<form>
-				<input type="number" placeholder="Coloca tu presupuesto" className="u-full-width" />
-				<input type="submit" value="Enviar" className="button-primary u-full-width" />
+			{error ? <Error mensaje="El Presupuesto no es válido" /> : null}
+
+			<form onSubmit={handleSubmit}>
+				<input
+					type="number"
+					placeholder="Coloca tu presupuesto"
+					className="u-full-width"
+					onChange={handleChange}
+				/>
+				<input
+					type="submit"
+					value="Establecer Presupuesto"
+					className="button-primary u-full-width"
+				/>
 			</form>
 		</>
 	);
