@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import Pregunta from './components/Pregunta';
-import Formulario from './Formulario';
+import Formulario from './components/Formulario';
+import Listado from './components/Listado';
 
 function App() {
 	const [presupuesto, setPresupuesto] = useState(0);
 	const [restante, setRestante] = useState(0);
 	const [actualizarUI, setActualizarUI] = useState(true);
+	const [gastos, setGastos] = useState([]);
+
+	const agregarNuevoGasto = (gasto) => {
+		setGastos([...gastos, gasto]);
+	};
 
 	return (
 		<div className="container">
@@ -22,9 +28,11 @@ function App() {
 					) : (
 						<div className="row">
 							<div className="one-half column">
-								<Formulario />
+								<Formulario agregarNuevoGasto={agregarNuevoGasto} />
 							</div>
-							<div className="one-half column">2</div>
+							<div className="one-half column">
+								<Listado gastos={gastos} />
+							</div>
 						</div>
 					)}
 				</div>
