@@ -26,7 +26,7 @@ function App() {
 			// Resetea el gasto a False
 			setCrearGasto(false);
 		}
-	}, [gasto]);
+	}, [gasto, gastos, crearGasto, restante]);
 
 	return (
 		<div className="container">

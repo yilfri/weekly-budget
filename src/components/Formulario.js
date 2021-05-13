@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Error from './Error';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 
 const Formulario = ({ setGasto, setCrearGasto }) => {
 	const [nombre, setNombre] = useState('');
@@ -64,6 +65,11 @@ const Formulario = ({ setGasto, setCrearGasto }) => {
 			<input type="submit" className="button-primary u-full-width" value="Agregar Gasto" />
 		</form>
 	);
+};
+
+Formulario.prototype = {
+	setGasto: PropTypes.func.isRequired,
+	setCrearGasto: PropTypes.func.isRequired
 };
 
 export default Formulario;
